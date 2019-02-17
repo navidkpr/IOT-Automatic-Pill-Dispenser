@@ -5,7 +5,7 @@ import os
 USER = 'pi'
 
 
-def create_cron(hour: int, id_: str, container: str = 'container'):
+def create_cron(name: str, hour: int, id_: str):
     """
     - adds a new cron job to run the dispenser script on dow day of the week
       at time time of the day
@@ -18,9 +18,13 @@ def create_cron(hour: int, id_: str, container: str = 'container'):
     """
     print("create_cron id: " + str(id_) + " hour: " + str(hour))
     cron = CronTab()
-    job = cron.new(command=f'python3 {os.getcwd()}/dispense.py {container}', comment=str(id_))
-    job.hour.on(hour)
+    job = cron.new(command='python3 {}/dispense.py "{}"'.format(os.getcwd(), name), comment=str(id_))
+    if hour < 0:
+        job.minute.every(1)
+    else:
+        job.hour.on(hour)
     cron.write(user=USER)
+    os.system('service cron start')
 
 
 def remove_cron(id_: str):
