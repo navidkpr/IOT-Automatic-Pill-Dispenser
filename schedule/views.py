@@ -38,6 +38,10 @@ def catchRequest(request):
             num_taken = Medicine.objects.filter(pk=req['id']).values_list('num_pill_taken', flat=True)[0]
             obj = Medicine.objects.filter(pk=req['id'])
             obj.update(num_pill_taken = num_taken + 1)
+
+    if req['command'] == "give_record":
+        for medicine in Medicine.objects.all():
+            print(medicine)
     return HttpResponse("OK")
 
 @csrf_exempt

@@ -9,13 +9,13 @@ from django.db import models
 
 class Medicine(models.Model):
     name = models.CharField(max_length = 50)
-    timeGap = models.IntegerField(validators = [MinValueValidator(4), MaxValueValidator(24)])
+    timeGap = models.IntegerField(validators = [MinValueValidator(1), MaxValueValidator(24)])
     num_pill_taken = models.IntegerField(default=0)
     num_pill_missed = models.IntegerField(default = 0)
     container = models.IntegerField(default = 0)
 
     def __str__(self):
-        return self.name + " Time Gap: " + str(self.timeGap)
+        return self.name
 
 class Container(models.Model):
     number = models.IntegerField(default=-1)
