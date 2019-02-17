@@ -24,7 +24,7 @@ def send_sms(body, to_num: str = '9786185596'):
 
 
 def log(message: str):
-    f = open('/home/pi/sms_log.txt', 'a')
+    f = open('/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/sms_log.txt', 'a')
     f.write(message)
     f.write('\n')
     f.close()
@@ -38,13 +38,13 @@ if __name__ == '__main__':
         # send an sms
         send_sms('Remember to take your {}'.format(sys.argv[1]))
         # Run the C program
-        stepper_cmd = '/home/pi/stepper {}'.format(sys.argv[2])
+        stepper_cmd = '/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper {}'.format(sys.argv[2])
         log('dispense.py - {}'.format(stepper_cmd))
         os.system(stepper_cmd)
         # wait and 
         time.sleep(5)
         try:
-            f = log('/home/pi/meds.dat')
+            f = log('/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/meds.dat')
             l = f.readline()
             l = l.split(',')
             status = int(l[0])
