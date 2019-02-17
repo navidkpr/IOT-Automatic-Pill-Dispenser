@@ -18,7 +18,7 @@ def create_cron(name: str, hour: int, id_: str):
     """
     print("create_cron id: " + str(id_) + " hour: " + str(hour))
     cron = CronTab()
-    job = cron.new(command='python3 {}/dispense.py "{}"'.format(os.getcwd(), name), comment=str(id_))
+    job = cron.new(command='python3 {}/schedule/dispense.py "{}" "{}"'.format(os.getcwd(), name, str(id_)), comment=str(id_))
     if hour < 0:
         job.minute.every(1)
     else:

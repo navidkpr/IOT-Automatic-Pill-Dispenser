@@ -15,13 +15,27 @@ def catchRequest(request):
     req = json.loads(request.body)
     if req['command'] == "add":
         med = Medicine(name=req['name'], timeGap=(int)(req['time']))
-        print(med.timeGap)
-        print("HI")
+        print("file")
         med.save()
 
     if req['command'] == "remove":
         Medicine.objects.filter(name=req['name']).delete()
+
+    if req['command'] == "record":
+        if req['status'] == 0:
+            num_missed = Medicine.objects.filter(pk=req['id']).values_list('num_pill_missed', flat=True)[0]
+            obj = Medicine.objects.filter(pk=req['id'])
+            obj.update(num_pill_missed = num_missed + 1)
+        if req['status'] == 1:
+            num_taken = Medicine.objects.filter(pk=req['id']).values_list('num_pill_taken', flat=True)[0]
+            obj = Medicine.objects.filter(pk=req['id'])
+            obj.update(num_pill_taken = num_taken + 1)
     return HttpResponse("OK")
+
+@csrf_exempt
+def catchRecord(request):
+    if request.POST:
+        print("HI")
 
 @csrf_exempt
 def test(request):

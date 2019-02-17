@@ -8,5 +8,5 @@ class ScheduleConfig(AppConfig):
     name = 'schedule'
 
     def ready(self):
-        #import makeuoft.schedule.signals.handlers
-        import signals
+        import schedule.signals
+        #import signals
