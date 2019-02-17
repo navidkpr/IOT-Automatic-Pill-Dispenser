@@ -64,7 +64,8 @@ def my_handler1(sender, instance, created=False, **kwargs):
     print("don2")
     try:
         print("tray nubmer is: " + str(obj.first().number))
-        instance.container = obj.first().number
+        instance.container = int(obj.first().number)
+        print(instance.container)
     except Exception as e:
         print(e)
     time_gap = instance.timeGap
