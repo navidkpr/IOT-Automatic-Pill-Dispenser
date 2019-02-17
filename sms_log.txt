@@ -1,8 +1,1 @@
-==============================
-dispense.py - main
-dispense.py arguments - ['dispense.py', 'name', '9', '10']
-dispense.py - send_sms
-dispense.py - /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper 9
-/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/meds.dat
-dispense.py - error occured in second level of main
-'NoneType' object has no attribute 'readline'
+

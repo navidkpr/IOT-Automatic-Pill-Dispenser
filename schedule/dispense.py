@@ -36,7 +36,7 @@ if __name__ == '__main__':
     log('dispense.py arguments - {}'.format(sys.argv))
     try:
         # send an sms
-        send_sms('Remember to take your {}'.format(sys.argv[1]))
+        send_sms('Remember to take your {}'.format(sys.argv[1]), sys.argv[3])
         # Run the C program
         stepper_cmd = '/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper {}'.format(sys.argv[2])
         log('dispense.py - {}'.format(stepper_cmd))
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         # wait and 
         time.sleep(5)
         try:
-            f = log('/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/meds.dat')
+            f = open('/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/meds.dat')
             l = f.readline()
             l = l.split(',')
             status = int(l[0])
@@ -55,6 +55,7 @@ if __name__ == '__main__':
             log(str(e))
             status = -1
             last_pos = -1
+        log('status: {}, last_pos: {}, num: {}'.format(status, last_pos, sys.argv[3]))
         upload_record(status, last_pos, sys.argv[3])
     except Exception as e:
         log('dispense.py - error occurred in top level of main')
