@@ -5,7 +5,7 @@ import os
 USER = 'pi'
 
 
-def create_cron(name: str, hour: int, id_: str, slot: int):
+def create_cron(name: str, hour: int, id_: str, slot: int, phone_num: str = '9786185596'):
     """
     - adds a new cron job to run the dispenser script on dow day of the week
       at time time of the day
@@ -18,7 +18,7 @@ def create_cron(name: str, hour: int, id_: str, slot: int):
     """
     print("cron-scheduler - create_cron id: " + str(id_) + " hour: " + str(hour))
     cron = CronTab(user=USER)
-    job = cron.new(command='python3 /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py "{}" "{}"'.format(name, str(slot)), comment=str(id_))
+    job = cron.new(command='python3 /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py "{}" "{}" "{}"'.format(name, str(slot), phone_num), comment='{}'.format(id_))
     if hour < 0:
         job.minute.every(2)
     else:
@@ -34,5 +34,6 @@ def remove_cron(id_: str):
     """
     print("cron_scheduler - remove_cron id: " + str(id_))
     cron = CronTab(user=USER)
-    commands = cron.remove_all(comment=str(id_))
+    commands = cron.remove_all(comment='{}'.format(id_))
     cron.write(user=USER)
+

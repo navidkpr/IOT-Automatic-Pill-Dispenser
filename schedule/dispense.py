@@ -1,5 +1,5 @@
 """
-run this file: python3 dispense.py "name" "new_location"
+run this file: python3 dispense.py "name" "new_location" "to_number"
 """
 
 import sys
@@ -55,7 +55,7 @@ if __name__ == '__main__':
             log(str(e))
             status = -1
             last_pos = -1
-        upload_record(status, last_pos)
+        upload_record(status, last_pos, sys.argv[3])
     except Exception as e:
         log('dispense.py - error occurred in top level of main')
         log(str(e))

@@ -1,0 +1,4 @@
+echo "Running the server and a 15 second delay to schedule cron jobs for doctor updates\n\n"
+sleep 15 && python3 schedule_updater.py && echo "\n\n" &
+sudo python3 manage.py runserver --insecure
+
