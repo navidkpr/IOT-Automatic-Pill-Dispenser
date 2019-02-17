@@ -17,7 +17,7 @@ def my_handler1(sender, instance, created=False, **kwargs):
         remove_cron(instance.id)
     time_gap = instance.timeGap
     startTime = 0
-    while startTime <= 20:
+    while startTime <= 20 and startTime > -2:
         create_cron(instance.name, startTime, instance.id)
         startTime += time_gap
 

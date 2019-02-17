@@ -12,8 +12,13 @@ import json
 @csrf_exempt
 def catchRequest(request):
     print(request.body)
-    req = json.loads(request.body)
+    try:
+        req = json.loads(request.body.decode('utf-8'))
+        print("HI")
+    except Exception as e:
+        print(e)
     if req['command'] == "add":
+        print("startfile")
         med = Medicine(name=req['name'], timeGap=(int)(req['time']))
         print("file")
         med.save()

@@ -10,6 +10,7 @@ from save_record.py import upload_record
 
 
 def send_sms(body, to_num: str = '9786185596'):
+    print('dispense.py - send_sms')
     acount_sid = 'AC819c0afb11b689eb481878955d9ada5f'
     auth_token = 'c1bb38dcaaa6ca7fc6a72f17d21ba38c'
 
@@ -22,6 +23,7 @@ def send_sms(body, to_num: str = '9786185596'):
 
 
 if __name__ == '__main__':
+    print('dispense.py - main')
     try:
         # send an sms
         send_sms('Remember to take your {}'.format(sys.argv[1]))
@@ -36,7 +38,9 @@ if __name__ == '__main__':
             status = l
             f.close()
         except:
+            print('dispense.py - error occured in second level of main')
             status = -1
         upload_record(sys.argv[2], status)
     except:
+        print('dispense.py - error occurred in top level of main')
         pass
