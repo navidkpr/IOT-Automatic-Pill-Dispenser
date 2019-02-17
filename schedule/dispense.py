@@ -5,6 +5,8 @@ run this file: python3 dispense.py "med name"
 import sys
 import os
 from twilio.rest import Client
+import time
+from save_record.py import upload_record
 
 
 def send_sms(body, to_num: str = '9786185596'):
@@ -25,5 +27,16 @@ if __name__ == '__main__':
         send_sms('Remember to take your {}'.format(sys.argv[1]))
         # Run the C program
         os.system("./stepper.out")
+        # wait and 
+        time.sleep(5)
+        try:
+            f = open('meds.dat')
+            l = f.readline()
+            l = int(l)
+            status = l
+            f.close()
+        except:
+            status = -1
+        upload_record(sys.argv[2], status)
     except:
         pass
