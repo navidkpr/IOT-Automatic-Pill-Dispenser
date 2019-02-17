@@ -12,6 +12,15 @@ class Medicine(models.Model):
     timeGap = models.IntegerField(validators = [MinValueValidator(4), MaxValueValidator(24)])
     num_pill_taken = models.IntegerField(default=0)
     num_pill_missed = models.IntegerField(default = 0)
+    #container = models.ManyToManyField('Container')
 
     def __str__(self):
         return self.name + " Time Gap: " + str(self.timeGap)
+
+class Container(models.Model):
+    number = models.IntegerField(default=-1)
+    busy = models.BooleanField(default=0)
+    drug_id = models.IntegerField(default=-1)
+
+    def __str__(self):
+        return str(self.number)
