@@ -1,1 +1,25 @@
 
+==============================
+dispense.py - main
+dispense.py arguments - ['/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py', 'a', '1', '6478707275']
+dispense.py - send_sms
+dispense.py - /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper 1
+status: 1, last_pos: 20, num: 6478707275
+==============================
+dispense.py - main
+dispense.py arguments - ['/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py', 'b', '2', '6478707275']
+dispense.py - send_sms
+dispense.py - /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper 2
+status: 1, last_pos: 9, num: 6478707275
+==============================
+dispense.py - main
+dispense.py arguments - ['/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py', 'c', '3', '6478707275']
+dispense.py - send_sms
+dispense.py - /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper 3
+status: 1, last_pos: 2, num: 6478707275
+==============================
+dispense.py - main
+dispense.py arguments - ['/home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py', 'd', '4', '6478707275']
+dispense.py - send_sms
+dispense.py - /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/stepper 4
+status: 1, last_pos: 3, num: 6478707275

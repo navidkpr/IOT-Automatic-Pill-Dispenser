@@ -48,12 +48,10 @@ def my_handler1(sender, instance, created=False, **kwargs):
         print(i)
         try:
             obj = Container.objects.filter(number=i+1).filter(user_id = instance.user_id).first()
-            print(obj.user_id)
-            print(obj.drug_id)
-            print(obj.busy)
+            print(obj)
             if obj.busy == 0 or instance.pk == obj.drug_id:
                 tray_num = i + 1
-                if instance.id==obj.values_list('drug_id', flat=True)[0]:
+                if instance.id == obj.drug_id:
                     break;
         except Exception  as e:
             print(e)
@@ -61,8 +59,14 @@ def my_handler1(sender, instance, created=False, **kwargs):
     print(tray_num)
     obj = Container.objects.filter(number=tray_num).filter(user_id=instance.user_id)
     obj.update(busy = 1)
-    obj.update(drug_id = instance.id)
-    
+    print('don')
+    obj.update(drug_id = instance.pk)
+    print("don2")
+    try:
+        print("tray nubmer is: " + str(obj.first().number))
+        instance.container = obj.first().number
+    except Exception as e:
+        print(e)
     time_gap = instance.timeGap
     startTime = 0
     try:
@@ -76,7 +80,7 @@ def my_handler1(sender, instance, created=False, **kwargs):
 def delete_handler(sender, instance = False, created = False, **kwargs):
     print("instance container is : {}".format(instance.container))
     if instance.container != 0:
-        obj = Container.objects.filter(number = instance.container)
+        obj = Container.objects.filter(number = instance.container).filter(user_id = instance.user_id)
         obj.update(busy = 0)
         obj.update(drug_id = -1)
     remove_cron(instance.id)
