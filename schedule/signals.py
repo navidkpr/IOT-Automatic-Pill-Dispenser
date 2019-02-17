@@ -3,8 +3,8 @@ from django.db.models.signals import post_save
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 from schedule.models import Medicine
-from schedule.cron_scheduler import create_cron, remove_cron 
-#def create_cron(name, hour, id_): 
+from schedule.cron_scheduler import create_cron, remove_cron
+#def create_cron(name, hour, id_):
     #print("create_cron name: " + name + " id: " + str(id_) + " hour: " + str(hour))
 
 
