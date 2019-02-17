@@ -24,7 +24,10 @@ def catchRequest(request):
         med.save()
 
     if req['command'] == "remove":
+        print("view function called for removal")
+        print(Medicine.objects.filter(name=req['name']))
         Medicine.objects.filter(name=req['name']).delete()
+        print("view function done with removal")
 
     if req['command'] == "record":
         if req['status'] == 0:

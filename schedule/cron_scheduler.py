@@ -5,7 +5,7 @@ import os
 USER = 'pi'
 
 
-def create_cron(name: str, hour: int, id_: str):
+def create_cron(name: str, hour: int, id_: str, slot: int):
     """
     - adds a new cron job to run the dispenser script on dow day of the week
       at time time of the day
@@ -14,13 +14,13 @@ def create_cron(name: str, hour: int, id_: str):
         - dow is "SUN"-"MON"
         - hour is int: 0-23
         - number is the number to dispense
-        - container is the container to dispense from
+        - slot is the number to rotate to
     """
     print("cron-scheduler - create_cron id: " + str(id_) + " hour: " + str(hour))
     cron = CronTab(user=USER)
-    job = cron.new(command='python3 {}/schedule/dispense.py "{}" "{}"'.format(os.getcwd(), name, str(id_)), comment=str(id_))
+    job = cron.new(command='python3 /home/pi/Desktop/IOT-Automatic-Pill-Dispenser/schedule/dispense.py "{}" "{}"'.format(name, str(slot)), comment=str(id_))
     if hour < 0:
-        job.minute.every(1)
+        job.minute.every(2)
     else:
         job.hour.on(hour)
     cron.write(user=USER)
