@@ -14,16 +14,6 @@ from schedule.cron_scheduler import create_cron, remove_cron
 @receiver(pre_save, sender=Medicine)
 def my_handler2(sender, instance, created=False, **kwargs):
     print("Called pre_save")
-    if instance.container == 0:
-        for i in range(21):
-            print(i)
-            obj = Container.objects.filter(number=i + 1)
-            if obj.values_list('busy', flat=True)[0] == 0:
-                print("went into if")
-                obj.update(busy = 1)
-                obj.update(drug_id = instance.id)
-                instance.container = i+1
-                break;
         #if instance.container == 0:
             #send error for all slots being full
 
@@ -32,6 +22,20 @@ def my_handler2(sender, instance, created=False, **kwargs):
 def my_handler1(sender, instance, created=False, **kwargs):
     print("Called post_save")
     remove_cron(instance.id)
+    if instance.container == 0:
+        for i in range(21):
+            print(i)
+            obj = Container.objects.filter(number=i + 1)
+            if obj.values_list('busy', flat=True)[0] == 0:
+                print("went into if")
+                obj.update(busy = 1)
+                print("1 done")
+                print(instance.id)
+                obj.update(drug_id = instance.id)
+                print("2 done")
+                Medicine.objects.filter(pk=instance.id).update(container = i+1)
+                print("DONE")
+                break;
     print("checking")
     time_gap = instance.timeGap
     startTime = 0
