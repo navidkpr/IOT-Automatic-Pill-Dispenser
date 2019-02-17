@@ -23,6 +23,7 @@ def create_cron(name: str, hour: int, id_: str, slot: int):
         job.minute.every(2)
     else:
         job.hour.on(hour)
+        job.minute.on(int((slot * 2.5) // 1))
     cron.write(user=USER)
     os.system('service cron start')
 

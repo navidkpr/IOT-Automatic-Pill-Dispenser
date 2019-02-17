@@ -40,8 +40,15 @@ def catchRequest(request):
             obj.update(num_pill_taken = num_taken + 1)
 
     if req['command'] == "give_record":
+        myfile = open("record.txt")
         for medicine in Medicine.objects.all():
-            print(medicine)
+            name = medicine
+            num_pill_taken = medicine.values_list('num_pill_taken', flat=True)[0]
+            num_pill_missed = medicine.values_list('num_pill_missed', flat=True)[0]
+            myfile.write("{},{},{}".format(name, num_pill_taken + num_pill_missed, num_pill_taken))
+            if (int)(req['delete']) == True:
+                medicine.update(num_pill_taken = 0)
+                medicine.update(num_pill_missed = 0)
     return HttpResponse("OK")
 
 @csrf_exempt
