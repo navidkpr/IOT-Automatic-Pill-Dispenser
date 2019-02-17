@@ -20,4 +20,5 @@ from schedule import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^req/$', views.catchRequest, name='request'),
+    url(r'^record/$', views.catchRecord, name='record'),
 ]
